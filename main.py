@@ -1,20 +1,28 @@
-from services.get_stocks_list \
-    import get_stocks_by_country_exchange, \
-    get_last_five_minutes_volume, \
-    get_top_ten_gainers
+import os
+from services.robinhood.robinhood_apis \
+    import connect, disconnect, get_act_profile, \
+    get_cash_balance, get_top_movers, get_day_trades, \
+    get_held_stocks
 
 
 def main():
-    # #   1. Get a list of the stocks on the exchange
-    # list = get_stocks_by_country_exchange('United States', 'NYSE')
-    #
-    # for stock in list:
-    #     get_last_five_minutes_volume(stock)
+    try:
 
+        while True:
 
-    #   Get the top ten stocks
-    stocks = get_top_ten_gainers()
-    print(stocks)
+        print('Starting bot')
+        connect()
+        # get_act_profile()
+        get_cash_balance()
+        # get_top_movers()
+        # get_day_trades()
+        get_held_stocks()
+        disconnect()
+    except KeyError as ke:
+        print(ke)
+    except:
+        print('other error')
+
 
 if __name__ == '__main__':
     main()

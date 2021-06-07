@@ -4,19 +4,16 @@ import json
 def get_top_ten_gainers():
     data = requests.get('https://securitiesapi.webullfintech.com/api/securities/market/v5/card/stockActivityPc.advanced/list?regionId=6&userRegionId=1&hasNum=0&pageSize=10')
     stocks = data.json()
-    #
-    for stock in stocks:
-        print('-----------------------')
-        print(stock)
-        print(stock['symbol'])
-        print(stock[''])
-    # stocks_list = []
-    # for elem in stocks['data']:
-    #     # print(elem['ticker']['symbol'])
-    #     # print('***********')
-    #     stocks_list.append(elem['ticker']['symbol'])
+    stocks_list = []
+    for elem in stocks:
+        dictionary = {
+            'symbol': elem['symbol'],
+            'volume': elem['volume'],
+            'pChange': elem['pChange']
+        }
+        stocks_list.append(dictionary)
 
-    # return stocks_lists
+    return stocks_list
 
 #   Get A List Of Stocks Based On Country And Exchange
 def get_stocks_by_country_exchange(country, exchange):
